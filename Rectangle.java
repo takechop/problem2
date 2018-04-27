@@ -19,6 +19,9 @@ public class Rectangle{
 	this.x = x;
 	this.y = y;
     }
+    void setColor(String c){
+	this.color = c;
+    }
 
     //ゲッター
     int getW(){
@@ -32,6 +35,9 @@ public class Rectangle{
     }
     int getY(){
 	return this.y;
+    }
+    String getColor(){
+	return this.color;
     }
     
     boolean move(int x0, int y0){

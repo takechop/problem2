@@ -15,6 +15,8 @@ class Board{
     //長方形の作成
     void create(List<Rectangle> rectangle){
 	Rectangle rect_tmp = new Rectangle();
+	System.out.println("長方形の色を入力してください");
+	rect_tmp.setColor(scan.next());
 	try{
 	    while(true){
 		System.out.print("width : ");
@@ -75,6 +77,7 @@ class Board{
 	int i = 1;
 	for(Rectangle rect : rectangle){
 	    System.out.println(i + "個目の長方形");
+	    System.out.println("color : " + rect.getColor());
 	    System.out.print("width : " + rect.getW() + ", ");
 	    System.out.print("height : " + rect.getH() + ", ");
 	    System.out.print("x : " + rect.getX() + ", ");
