@@ -26,22 +26,38 @@ class Board{
 		System.out.print("y : ");
 		int y = scan.nextInt();
 		//長方形がボードに収まり
-		if(rect_tmp.set(w,h,x,y) == true){
+		if(this.rectangleSizeCheck(w,h,x,y) == true){
 		    //長方形に被りがない
-		    if(this.rectangleCheck(rectangle,w,h,x,y) == true){
-			rectangle.add(rect_tmp);
-			break;
+		    if(this.rectangleMatchCheck(rectangle,w,h,x,y) == true){
+			if(rectangle.size() != 10){
+			    rect_tmp.setElement(w,h,x,y);
+			    rectangle.add(rect_tmp);
+			    break;
+			}else{
+			    System.out.println("長方形をこれ以上作成できません");
+			    break;
+			}
 		    }
 		}
 	    }
 	}catch(InputMismatchException e){
-	    System.out.println("数値を入力してください");
-	    scan.next();
+		System.out.println("数値を入力してください");
+		scan.next();
 	}
     }
 
+    //長方形がボードに収まるか確認
+    boolean rectangleSizeCheck(int w, int h, int x, int y){
+	if(w > 0 && h > 0 && x >= 0 && y >= 0 &&
+	   w+x > 0 && h+y > 0 && w+x <= Board.WIDTH && h+y <= Board.HEIGHT){
+	    return true;
+	}else{
+	    System.out.println("長方形がボードに収まっていません");
+	    return false;
+	}
+    }
     //長方形に被りが存在するか確認
-    boolean rectangleCheck(List<Rectangle> rectangle, int w, int h, int x, int y){
+    boolean rectangleMatchCheck(List<Rectangle> rectangle, int w, int h, int x, int y){
 	for(Rectangle rect : rectangle){
 	    if(rect.getW() == w && rect.getH() == h &&
 	       rect.getX() == x && rect.getY() == y){
@@ -80,6 +96,16 @@ class Board{
 	    }catch(IndexOutOfBoundsException e){
 		System.out.println("存在していません");
 	    }
+	}
+    }
+    
+    //すべての長方形を削除
+    void deleteAll(List<Rectangle> rectangle){
+	if(rectangle.isEmpty() == true){
+	    System.out.println("長方形は作成されていません");
+	}else{
+	    System.out.println("長方形を全て削除します");
+	    rectangle.clear();
 	}
     }
 }

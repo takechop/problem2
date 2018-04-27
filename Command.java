@@ -44,6 +44,9 @@ class Command{
 	case 5:
 	    board.delete(rectangle);
 	    break;
+	case 6:
+	    board.deleteAll(rectangle);
+	    break;
 	case 8:
 	    board.displayBoard(rectangle);
 	    break;
@@ -63,18 +66,19 @@ class Command{
 	board.displayBoard(rectangle);
 	System.out.print("操作したい長方形 : ");
 	index = scan.nextInt();
-	//フィールドのコピーができないのでゴリ押し
-	if(rect_before.set(rectangle.get(index-1).getW(), rectangle.get(index-1).getH(),
-			   rectangle.get(index-1).getX(), rectangle.get(index-1).getY())){
-	    return rect_before;
+	try{
+		rect_before.setElement(rectangle.get(index-1).getW(), rectangle.get(index-1).getH(),rectangle.get(index-1).getX(), rectangle.get(index-1).getY());
+	    }catch(IndexOutOfBoundsException e){
+	    System.out.println("存在していません");
 	}
-	//	return rect_before;
+	return rect_before;
     }
+    
 
     //処理後の長方形の置き換え
     void replaceRectangle(List<Rectangle> rectangle, Rectangle rect_after){
 	//移動後の長方形がかぶってないかチェック
-	if(board.rectangleCheck(rectangle, rect_after.getW(), rect_after.getH(),rect_after.getX(), rect_after.getY()) == true){
+	if(board.rectangleMatchCheck(rectangle, rect_after.getW(), rect_after.getH(),rect_after.getX(), rect_after.getY()) == true){
 	    rectangle.set(index-1, rect_after);
 	}
     }
