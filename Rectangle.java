@@ -35,9 +35,13 @@ public class Rectangle{
     }
     
     boolean move(int x0, int y0){
-	return board.rectangleSizeCheck(this.width,this.height,this.x+x0,this.y+y0);
+	this.x += x0;
+	this.y += y0;
+	return board.rectangleSizeCheck(this.width,this.height,this.x,this.y);
     }
     boolean scale(float mx, float my){
-	return board.rectangleSizeCheck(Math.round(this.width*mx),Math.round(this.height*my),this.x,this.y);
+	this.width = Math.round(this.width*mx);
+	this.height = Math.round(this.height*my);
+	return board.rectangleSizeCheck(this.width,this.height,this.x,this.y);
     }
 }

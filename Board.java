@@ -95,6 +95,9 @@ class Board{
 		rectangle.remove(index-1);
 	    }catch(IndexOutOfBoundsException e){
 		System.out.println("存在していません");
+	    }catch(InputMismatchException e){
+		System.out.println("数値を入力してください");
+		scan.next();
 	    }
 	}
     }
